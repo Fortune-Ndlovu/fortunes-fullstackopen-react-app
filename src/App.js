@@ -1,10 +1,12 @@
+import Note from './components/Note';
+
 function App({ notes }) {
   return (
     <div>
       <h1>notes</h1>
       <ul>
         {notes.map((note) => (
-          <li key={note.id}> {note.content} </li>
+          <Note key={note.id} note={note} />
         ))}
       </ul>
     </div>
