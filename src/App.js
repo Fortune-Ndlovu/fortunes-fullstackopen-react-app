@@ -1,4 +1,4 @@
-import Course from "./components/Course";
+import Course from './components/Course'
 
 function App() {
   const course = {
@@ -22,7 +22,7 @@ function App() {
       }
     ]
   }
-  return <Course course={course} />
+  return <Course course={course}/>
 }
 
 export default App;
