@@ -1,49 +1,47 @@
 import { useState } from "react";
-import Note from "./components/Note";
 
-const App = (props) => {
-  const [notes, setNotes] = useState(props.notes);
-  const [newNote, setNewNote] = useState('a new note...');
-  const [showAll, setShowAll] = useState(true);
+const App = () => {
+  const [persons, setPersons] = useState([{ name: "Arto Hellas", id: 1 }]);
+  const [newName, setNewName] = useState("");
 
-  const handleNoteChange = (e) => {
-    console.log(e.target.value);
-    setNewNote(e.target.value);
-  }
-
-  const addNote = (e) => {
+  const addName = (e) => {
     e.preventDefault();
-    const noteObject = {
-      content: newNote,
-      important: Math.random() < 0.5,
-      id: notes.length + 1
-    };
-    setNotes(notes.concat(noteObject));
-    setNewNote('');
+    console.log("something", e.target);
   };
 
-  const notesToShow = showAll
-    ? notes : notes.filter(note => note.important === true);
+  const handleNameChange = (e) => {
+    console.log(e.target.value);
+    setNewName(e.target.value);
+  };
 
+  const addPerson = (e) => {
+    e.preventDefault();
+    const personObject = {
+      name: newName,
+      id: persons.length + 1
+    };
+
+    setPersons(persons.concat(personObject));
+    setNewName("");
+  };
 
   return (
     <div>
-      <h1>Notes</h1>
-      <div>
-        <button onClick={() => setShowAll(!showAll)}>
-          show {showAll ? 'important' : 'all'}
-        </button>
-      </div>
-      <ul>
-        {notesToShow.map((note) => (
-          <Note key={note.id} note={note} />
-        ))}
-      </ul>
-
-      <form onSubmit={addNote}>
-        <input value={newNote} onChange={handleNoteChange} />
-        <button type="submit">save</button>
+      <h2>Phonebook</h2>
+      <form onSubmit={addPerson}>
+        <div>
+          name: <input type={newName} onChange={handleNameChange} />
+        </div>
+        <div>
+          <button type="submit">add</button>
+        </div>
       </form>
+      <h2>Numbers</h2>
+      <div>
+        {persons.map((person) => (
+          <p key={person.id}>{person.name}</p>
+        ))}
+      </div>
     </div>
   );
 };
