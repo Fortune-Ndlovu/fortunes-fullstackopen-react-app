@@ -2,15 +2,14 @@ import { useState } from "react";
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: "Arto Hellas", id: 1, userNumber: "555-555-555" }
+    { name: "Arto Hellas", userNumber: "555-555-555", id: 1 },
+    { name: "Ada Lovelace", number: "39-44-5323523", id: 2 },
+    { name: "Dan Abramov", number: "12-43-234345", id: 3 },
+    { name: "Mary Poppendieck", number: "39-23-6423122", id: 4 }
   ]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
-
-  const addName = (e) => {
-    e.preventDefault();
-    // console.log("something", e.target);
-  };
+  const [filterValue, setFilterValue] = useState("");
 
   const handleNameChange = (e) => {
     // console.log(e.target.value);
@@ -19,6 +18,10 @@ const App = () => {
 
   const handleNumberChange = (e) => {
     setNewNumber(e.target.value);
+  };
+
+  const handleFilterChange = (e) => {
+    setFilterValue(e.target.value);
   };
 
   const addPerson = (e) => {
@@ -45,17 +48,18 @@ const App = () => {
     }
   };
 
-  const filterPeopleList = (e) => { 
-    console.log(`Filterringg`);
-  }
+  const filterPeopleList = persons.filter((person) =>
+    person.name.toLowerCase().includes(filterValue.toLowerCase())
+  );
 
   return (
     <div>
       <h2>Phonebook</h2>
       <div>
-        Filter shown with: <input type={filterPeopleList}/>
+        Filter shown with:{" "}
+        <input type={filterValue} onChange={handleFilterChange} />
       </div>
-      
+
       <h2>Add a New</h2>
       <form onSubmit={addPerson}>
         <div>
@@ -70,7 +74,7 @@ const App = () => {
       </form>
       <div>
         <h2>Numbers</h2>
-        {persons.map((person) => (
+        {filterPeopleList.map((person) => (
           <p key={person.id}>
             {person.name} {person.userNumber}
           </p>
