@@ -45,9 +45,18 @@ const App = () => {
     }
   };
 
+  const filterPeopleList = (e) => { 
+    console.log(`Filterringg`);
+  }
+
   return (
     <div>
       <h2>Phonebook</h2>
+      <div>
+        Filter shown with: <input type={filterPeopleList}/>
+      </div>
+      
+      <h2>Add a New</h2>
       <form onSubmit={addPerson}>
         <div>
           name: <input type={newName} onChange={handleNameChange} />
@@ -59,8 +68,8 @@ const App = () => {
           <button type="submit">add</button>
         </div>
       </form>
-      <h2>Numbers</h2>
       <div>
+        <h2>Numbers</h2>
         {persons.map((person) => (
           <p key={person.id}>
             {person.name} {person.userNumber}
