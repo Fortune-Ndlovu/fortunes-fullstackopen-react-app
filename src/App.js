@@ -6,11 +6,11 @@ const App = () => {
 
   const addName = (e) => {
     e.preventDefault();
-    console.log("something", e.target);
+    // console.log("something", e.target);
   };
 
   const handleNameChange = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setNewName(e.target.value);
   };
 
@@ -21,8 +21,20 @@ const App = () => {
       id: persons.length + 1
     };
 
-    setPersons(persons.concat(personObject));
-    setNewName("");
+    let personExits = false;
+    for (let i = 0; i < persons.length; i++) {
+      if (personObject.name === persons[i].name) {
+        personExits = true;
+        break;
+      }
+    }
+    if (personExits) {
+      alert(`${personObject.name} has already been added`);
+    } else{
+      setPersons(persons.concat(personObject));
+      setNewName("");
+    }
+    
   };
 
   return (
