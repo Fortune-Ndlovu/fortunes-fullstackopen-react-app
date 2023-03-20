@@ -16,14 +16,14 @@ const App = () => {
   const [newNumber, setNewNumber] = useState("");
   const [filterValue, setFilterValue] = useState("");
 
-  useEffect(() => {
+  const hook = () => {
     console.log("effect");
     axios.get('http://localhost:3001/notes').then((response) => { 
       console.log("promise fulfilled");
       setNotes(response.data);
     });
-  }, []);
-  console.log("render", notes.length, "note");
+  };
+  useEffect(hook, []);
 
   const handleNameChange = (e) => {
     // console.log(e.target.value);
